@@ -1,38 +1,125 @@
-\documentclass{article} % Document class (options: report, book, etc.)
+\documentclass[a4paper,12pt]{article}
 
-\usepackage[utf8]{inputenc} % Support for UTF-8 encoding
-\usepackage{amsmath}       % Math symbols and environments
-\usepackage{graphicx}      % Include images
+% Packages
+\usepackage[utf8]{inputenc}  % UTF-8 encoding
+\usepackage{amsmath}         % Mathematical symbols
+\usepackage{graphicx}        % Images
+\usepackage{booktabs}        % Tables
+\usepackage{hyperref}        % Hyperlinks
+\usepackage{xcolor}          % Colored text
+\usepackage{listings}        % Code listings
 
-\title{Stage Test and Validation} % Document title
-\author{Bonifacio Miranda}         % Author's name
-\date{1/24/2025}              % Date (use \date{} for no date)
+% Settings for Listings (code blocks)
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    tabsize=2
+}
 
-\begin{document}           % Start of the document
-\maketitle                 % Generate title
+% Title and Author
+\title{Testing and Validation Report}
+\author{Your Name}
+\date{\today}
 
-\section{Introduction}     % First section
-In this document we shall go through testing and validation for verifying stage to micron level acurracy on the x/y plane.
+\begin{document}
 
+% Title Page
+\maketitle
+\tableofcontents
+\newpage
 
-\subsection{Math Example}  % Subsection
-Here is an inline formula: \(E = mc^2\). 
+% Section: Introduction
+\section{Introduction}
+This document outlines the testing and validation process for the project \textbf{[Project Name]}. It includes test objectives, methods, results, and conclusions.
 
-Or a displayed formula:
-\[
-\int_a^b x^2 \, dx = \frac{b^3}{3} - \frac{a^3}{3}
-\]
+\subsection{Purpose}
+The purpose of this testing is to verify that the system meets the specified requirements and functions as intended.
 
-\section{Adding Figures}
-Include a figure using the `graphicx` package:
-\begin{figure}[h]
+% Section: Test Plan
+\section{Test Plan}
+\subsection{Test Environment}
+The testing was conducted in the following environment:
+\begin{itemize}
+    \item Operating System: Ubuntu 22.04
+    \item Hardware: Intel Core i7, 16GB RAM
+    \item Tools: Python 3.10, Jupyter Notebook
+    \item LaTeX: TeX Live 2023
+\end{itemize}
+
+\subsection{Test Cases}
+The table below lists the test cases:
+
+\begin{table}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{example-image} % Replace with your image file
-    \caption{An example image.}
+    \begin{tabular}{|l|p{8cm}|l|l|}
+        \hline
+        \textbf{Test ID} & \textbf{Description} & \textbf{Expected Result} & \textbf{Status} \\ \hline
+        TC001 & Validate input file format & File is successfully parsed & Pass \\ \hline
+        TC002 & Verify calculation accuracy & Results match theoretical values & Fail \\ \hline
+        TC003 & Check output file generation & File is saved in the correct location & Pass \\ \hline
+    \end{tabular}
+    \caption{Test Cases}
+    \label{tab:testcases}
+\end{table}
+
+% Section: Test Methods
+\section{Test Methods}
+\subsection{Input Validation}
+Inputs were tested with valid, invalid, and edge cases to ensure proper handling. For example:
+
+\begin{lstlisting}[language=Python, caption=Input Validation Code]
+def validate_input(file_path):
+    if not file_path.endswith('.csv'):
+        raise ValueError("Invalid file format. Expected .csv")
+\end{lstlisting}
+
+\subsection{Output Verification}
+The results were compared against known baselines to validate accuracy.
+
+% Section: Results
+\section{Results}
+\subsection{Test Results Summary}
+The following results were obtained:
+\begin{itemize}
+    \item Total Tests: 10
+    \item Passed: 8
+    \item Failed: 2
+\end{itemize}
+
+\subsection{Failed Test Analysis}
+For test case TC002, the calculation mismatch was due to incorrect rounding. The expected result was 3.14, but the output was 3.14159.
+
+\subsection{Figures}
+Figure~\ref{fig:example} shows the comparison graph between expected and actual values.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{example-image} % Replace with your image file
+    \caption{Comparison of Expected vs Actual Values}
     \label{fig:example}
 \end{figure}
 
+% Section: Conclusion
 \section{Conclusion}
-This concludes our simple \LaTeX\ example. Enjoy writing your document!
+The testing and validation process identified minor issues that need resolution, but the overall system performs as expected.
 
-\end{document}             % End of the document
+% Appendix
+\appendix
+\section{Appendix}
+\subsection{Code Snippets}
+Below is the Python code used for testing:
+
+\begin{lstlisting}[language=Python, caption=Sample Python Code]
+import numpy as np
+
+def calculate_area(radius):
+    return np.pi * radius**2
+\end{lstlisting}
+
+\end{document}
